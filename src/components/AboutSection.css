@@ -1,0 +1,169 @@
+.about {
+  position: relative;
+  background: var(--ivory);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 96px 0 56px;
+  overflow: clip;
+}
+.about__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(40px, 7vw, 120px);
+  align-items: center;
+}
+.about__window-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+/* The airplane window: cabin bezel → inner frame → pane */
+.window {
+  width: min(330px, 72vw);
+  aspect-ratio: 30 / 42;
+  padding: 7%;
+  border-radius: 48% / 36%;
+  background: var(--white);
+  box-shadow:
+    0 0 0 1px rgba(180, 154, 105, 0.35),
+    inset 0 -14px 30px rgba(120, 90, 50, 0.12),
+    0 40px 70px -40px rgba(60, 30, 20, 0.45);
+  will-change: transform;
+}
+.window__pane {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 46% / 34%;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 6px var(--champagne),
+    inset 0 0 0 7px rgba(180, 154, 105, 0.6);
+  isolation: isolate;
+}
+.window__view {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.window__shade {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, #ece2cf 0 22px, #e2d5bd 22px 23px);
+  transform: translateY(-101%);
+  box-shadow: 0 6px 12px rgba(60, 30, 20, 0.18);
+}
+.window__shade-tab {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: 44px;
+  height: 8px;
+  translate: -50% 0;
+  border-radius: 4px;
+  background: var(--gold);
+}
+.about__tag {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+.about__tag strong {
+  color: var(--burgundy);
+  font-weight: 600;
+}
+
+.about__title {
+  font-size: clamp(44px, 5.6vw, 92px);
+  margin: 20px 0 28px;
+}
+.about__copy .lede {
+  max-width: 32ch;
+  margin-bottom: 28px;
+  font-size: clamp(20px, 1.9vw, 27px);
+}
+.about__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  border-top: 1px solid var(--rule);
+  padding-top: 26px;
+}
+.about__cols .body {
+  margin: 0;
+}
+.about__mission {
+  color: var(--ink) !important;
+  font-family: var(--serif);
+  font-size: 22px !important;
+  line-height: 1.3;
+}
+.about__mission-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: 8px;
+}
+.about__pass {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: 0;
+  margin: 30px 0 0;
+  border: 1px dashed rgba(112, 27, 43, 0.4);
+}
+.about__pass div {
+  padding: 12px 22px;
+}
+.about__pass div + div {
+  border-left: 1px dashed rgba(112, 27, 43, 0.4);
+}
+.about__pass dt {
+  font-size: 9.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+.about__pass dd {
+  margin: 2px 0 0;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+}
+
+@media (max-width: 899px) {
+  .about {
+    min-height: 0;
+    padding: 90px 0 80px;
+  }
+  .about__inner {
+    grid-template-columns: 1fr;
+  }
+  .window {
+    width: min(260px, 64vw);
+  }
+  .about__cols {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .about__pass {
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+  }
+  .about__pass div {
+    padding: 10px 12px;
+  }
+  .about__pass dd {
+    font-size: 15px;
+  }
+}

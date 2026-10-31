@@ -1,0 +1,239 @@
+.journey {
+  position: relative;
+  background: var(--champagne);
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 104px 0 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(16px, 2.6vh, 34px);
+  overflow: clip;
+}
+.journey__titles {
+  display: grid;
+  margin-top: 14px;
+}
+@media (min-width: 900px) {
+  .journey__h {
+    white-space: nowrap;
+  }
+}
+.journey__h {
+  font-size: clamp(34px, 4.2vw, 68px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .journey__titles > * {
+    grid-area: 1 / 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey__h-end {
+    margin-top: 16px;
+  }
+}
+
+.journey__viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+}
+.journey__pan {
+  width: min(1320px, 94vw, calc((100svh - 360px) * 2.61));
+  margin: 0 auto;
+  will-change: transform;
+}
+.journey__map {
+  position: relative;
+  width: 100%;
+  perspective: 1800px;
+  color: rgba(25, 24, 23, 0.32);
+}
+.fold {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: #f2ead9;
+  box-shadow: 0 30px 50px -40px rgba(60, 30, 20, 0.5);
+}
+.fold__map {
+  max-width: none;
+  height: 100%;
+}
+.fold__crease {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(60, 30, 20, 0.12), transparent 18%, transparent 82%, rgba(255, 252, 246, 0.5));
+}
+.fold:nth-child(even) .fold__crease {
+  background: linear-gradient(90deg, rgba(255, 252, 246, 0.5), transparent 18%, transparent 82%, rgba(60, 30, 20, 0.12));
+}
+
+.journey__overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.route {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.route--plan {
+  stroke: #b49a69;
+  stroke-width: 2;
+  opacity: 0.45;
+}
+.route--done {
+  stroke: #701b2b;
+  stroke-width: 3;
+}
+.lm__leader {
+  stroke: #701b2b;
+  stroke-width: 1.2;
+  fill: none;
+}
+.lm__title {
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--ink);
+}
+.lm__sub {
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  fill: var(--burgundy);
+}
+.lm__pulse {
+  fill: none;
+  stroke: #701b2b;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse 2.4s var(--ease) infinite;
+}
+@keyframes pulse {
+  from {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.journey__closing {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.journey__closing .lede {
+  max-width: 34ch;
+  font-size: clamp(20px, 1.8vw, 26px);
+}
+.journey__legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+.journey__legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--burgundy);
+}
+.dot--now {
+  background: var(--burgundy);
+}
+
+@media (max-width: 899px) {
+  .journey {
+    padding-top: 92px;
+    justify-content: flex-start;
+  }
+  .journey__h {
+    font-size: clamp(34px, 9.5vw, 54px);
+  }
+  .journey__pan {
+    width: 300vw;
+    margin: 0;
+  }
+  @media (min-width: 600px) {
+    .journey__pan {
+      width: 190vw;
+    }
+  }
+  .journey__closing .lede {
+    font-size: 19px;
+  }
+  .journey__legend {
+    font-size: 10px;
+    gap: 10px;
+  }
+}
+@media (max-width: 899px) and (prefers-reduced-motion: reduce) {
+  /* without the scroll-driven pan, let people swipe across the map */
+  .journey__viewport {
+    overflow-x: auto;
+  }
+  .journey__pan {
+    width: 200vw;
+  }
+}
+
+/* landmarks: ink = route stops, gold = further horizons */
+.lm--ink .lm__art {
+  fill: var(--ink);
+  color: var(--ink);
+}
+.lm--gold .lm__art {
+  fill: #c2a979;
+  color: #c2a979;
+}
+.lm__pin {
+  fill: var(--burgundy);
+}
+.lm--gold .lm__pin {
+  fill: #b49a69;
+}
+.lm--gold .lm__leader {
+  stroke: #b49a69;
+}
+.lm--gold .lm__title {
+  font-size: 20px;
+  fill: #8a7448;
+}
+.place circle {
+  fill: none;
+  stroke: var(--burgundy);
+  stroke-width: 1.5;
+}
+.place text {
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  fill: var(--ink-60);
+}

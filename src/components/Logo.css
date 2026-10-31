@@ -1,0 +1,70 @@
+.logo {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  aspect-ratio: 676 / 613;
+  mix-blend-mode: multiply;
+  /* feather the paper edges into the page */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent),
+    linear-gradient(180deg, transparent, #000 3%, #000 97%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent),
+    linear-gradient(180deg, transparent, #000 3%, #000 97%, transparent);
+  mask-composite: intersect;
+}
+.logo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.logo .logo__base {
+  position: relative;
+}
+
+/* globe disc: centre (372, 127), radius 74 in the 676 × 613 image */
+.logo__globe {
+  clip-path: circle(11.5% at 55.03% 20.72%);
+  transform-origin: 55.03% 20.72%;
+  transition: transform 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.logo:not(.is-on) .logo__globe {
+  transform: rotate(-220deg);
+}
+
+/* paper plane outline */
+.logo__plane,
+.logo__patch {
+  clip-path: polygon(59.9% 7.5%, 79.3% 7%, 71.9% 21.9%, 65.4% 19.2%, 63.3% 13.7%);
+}
+.logo__patch {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+}
+.logo__plane {
+  transition: transform 1.4s cubic-bezier(0.3, 0.6, 0.25, 1) 0.5s, opacity 0.5s ease 0.5s;
+}
+.logo:not(.is-on) .logo__plane {
+  transform: translate(-22%, 14%) scale(0.4) rotate(-14deg);
+  transform-origin: 70% 14%;
+  opacity: 0;
+}
+
+.logo--nav {
+  width: 72px;
+}
+.logo--lg {
+  width: clamp(200px, 24vw, 320px);
+}
+.logo--splash {
+  width: min(360px, 70vw);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo .logo__globe,
+  .logo .logo__plane {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
